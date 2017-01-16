@@ -39,9 +39,9 @@ class RollupTask extends Elixir.Task {
             .on('error', this.onError())
             .pipe(source(this.output.name))
             .pipe(buffer())
+            .pipe(this.initSourceMaps({ loadMaps: true, largeFile: true }))
             .pipe(this.minify())
             .on('error', this.onError())
-            .pipe(this.initSourceMaps({ loadMaps: true }))
             .pipe(this.writeSourceMaps())
             .pipe(this.saveAs(gulp));
     }
